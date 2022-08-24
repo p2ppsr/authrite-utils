@@ -31,7 +31,7 @@ Verifies that the provided certificate has a valid signature
 
 *   `certificate` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The certificate to verify.
 *   `keyring` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The keyring containing the encrypted fieldRevelationKeys.
-*   `identityKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The public key belonging to the certificate authrity that signed the certificate.
+*   `identityKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The public key as a base64 string belonging to the certificate authrity that signed the certificate.
 *   `verifierPrivateKey` &#x20;
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** An object containing the decrypted fields.
