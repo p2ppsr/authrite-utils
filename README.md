@@ -31,8 +31,7 @@ Verifies that the provided certificate has a valid signature
 
 *   `certificate` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The certificate to verify.
 *   `keyring` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The keyring containing the encrypted fieldRevelationKeys.
-*   `identityKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The public key as a base64 string belonging to the certificate authrity that signed the certificate.
-*   `verifierPrivateKey` &#x20;
+*   `verifierPrivateKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** A private key as a base64 string belonging to the certificate verifier. If not provided, the BabbageSDK decrypt function will be used instead.
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** An object containing the decrypted fields.
 

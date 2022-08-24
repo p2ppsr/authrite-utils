@@ -8,7 +8,7 @@ const BabbageSDK = require('@babbage/sdk')
  * Verifies that the provided certificate has a valid signature
  * @param {Object} certificate The certificate to verify.
  * @param {Object} keyring The keyring containing the encrypted fieldRevelationKeys.
- * @param {string} identityKey The public key as a base64 string belonging to the certificate authrity that signed the certificate.
+ * @param {string} verifierPrivateKey A private key as a base64 string belonging to the certificate verifier. If not provided, the BabbageSDK decrypt function will be used instead.
  * @returns {Object} An object containing the decrypted fields.
  */
 const decryptCertificateFields = async (certificate, keyring, verifierPrivateKey) => {
