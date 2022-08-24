@@ -7,7 +7,7 @@ global.crypto = new Crypto()
  * Verifies that the provided certificate has a valid signature
  * @param {Object} certificate The certificate to verify.
  * @param {Object} keyring The keyring containing the encrypted fieldRevelationKeys.
- * @param {string} identityKey The public key belonging to the certificate authrity that signed the certificate.
+ * @param {string} identityKey The public key as a base64 string belonging to the certificate authrity that signed the certificate.
  * @returns {Object} An object containing the decrypted fields.
  */
 const decryptCertificateFields = async (certificate, keyring, identityKey, verifierPrivateKey) => {
