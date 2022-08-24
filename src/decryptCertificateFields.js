@@ -7,15 +7,15 @@ global.crypto = new Crypto()
  * Verifies that the provided certificate has a valid signature
  * @param {Object} certificate The certificate to verify.
  * @param {Object} keyring The keyring containing the encrypted fieldRevelationKeys.
- * @param {string} caPublicKey The public key belonging to the certificate authrity that signed the certificate.
+ * @param {string} identityKey The public key belonging to the certificate authrity that signed the certificate.
  * @returns {Object} An object containing the decrypted fields.
  */
-const decryptCertificateFields = async (certificate, keyring, caPublicKey, verifierPrivateKey) => {
+const decryptCertificateFields = async (certificate, keyring, identityKey, verifierPrivateKey) => {
   const decryptedFields = {}
   for (const fieldName in keyring) {
     // 1. Derive their private key:
     const derivedPrivateKeyringKey = getPaymentPrivateKey({
-      senderPublicKey: caPublicKey,
+      senderPublicKey: identityKey,
       recipientPrivateKey: verifierPrivateKey,
       invoiceNumber: `2-authrite certificate field encryption cert-${certificate.serialNumber} ${fieldName}`,
       returnType: 'bsv'
@@ -23,7 +23,7 @@ const decryptCertificateFields = async (certificate, keyring, caPublicKey, verif
     // 2. Derive the sender’s public key:
     const derivedPublicKeyringKey = getPaymentAddress({
       senderPrivateKey: verifierPrivateKey,
-      recipientPublicKey: caPublicKey,
+      recipientPublicKey: identityKey,
       invoiceNumber: `2-authrite certificate field encryption cert-${certificate.serialNumber} ${fieldName}`,
       returnType: 'bsv'
     })
