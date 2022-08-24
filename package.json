@@ -1,0 +1,21 @@
+{
+  "name": "authrite-utils",
+  "version": "0.1.0",
+  "description": "Tools for working with Authrite.",
+  "main": "./src/index.js",
+  "scripts": {
+    "doc": "documentation readme src/index.js -f md -s API"
+  },
+  "author": "Peer-to-peer Privacy Systems Research, LLC",
+  "license": "Open BSV License",
+  "devDependencies": {
+    "documentation": "^14.0.0",
+    "standard": "^17.0.0"
+  },
+  "dependencies": {
+    "@cwi/crypto": "^0.1.0",
+    "@peculiar/webcrypto": "^1.4.0",
+    "bsv": "^1.5.6",
+    "sendover": "^1.1.4"
+  }
+}
