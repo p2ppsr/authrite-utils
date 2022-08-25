@@ -1,5 +1,6 @@
 const { getPaymentAddress } = require('sendover')
 const bsv = require('bsv')
+const validateCertificateStructure = require('./utils/validateCertificateStructure')
 
 /**
  * Verifies that the provided certificate has a valid signature
@@ -7,6 +8,8 @@ const bsv = require('bsv')
  * @returns {Boolean} the result of the verification.
  */
 const verifyCertificateSignature = (certificate) => {
+  // Validate Certificate Structure
+  validateCertificateStructure(certificate)
   // Remove Signature
   const signature = certificate.signature
   delete certificate.signature

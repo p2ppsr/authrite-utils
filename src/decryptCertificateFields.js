@@ -19,7 +19,7 @@ const decryptCertificateFields = async (certificate, keyring, verifierPrivateKey
       // Use the BabbageSDK to decrypt if no verifierPrivateKey was provided
       fieldRevelationKey = await BabbageSDK.decrypt({
         ciphertext: Buffer.from(keyring[fieldName], 'base64'),
-        protocolID: '2-authrite certificate field encryption',
+        protocolID: [2, 'authrite certificate field encryption'],
         keyID: `${certificate.serialNumber} ${fieldName}`,
         returnType: 'string'
       })
