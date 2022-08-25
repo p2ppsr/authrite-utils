@@ -15,7 +15,7 @@ Tools for working with Authrite
 
 ### verifyCertificateSignature
 
-Verifies that the provided certificate has a valid signature
+Verifies that the provided certificate has a valid signature. Also checks the structure of the certificate.
 
 #### Parameters
 

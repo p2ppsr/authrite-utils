@@ -3,7 +3,7 @@ const bsv = require('bsv')
 const validateCertificateStructure = require('./utils/validateCertificateStructure')
 
 /**
- * Verifies that the provided certificate has a valid signature
+ * Verifies that the provided certificate has a valid signature. Also checks the structure of the certificate.
  * @param {Object} certificate The certificate to verify.
  * @returns {Boolean} the result of the verification.
  */

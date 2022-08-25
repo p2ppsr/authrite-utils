@@ -1,6 +1,0 @@
-const decryptCertificateFields = require('../decryptCertificateFields')
-const test = async () => {
-  const decryptedFields = await decryptCertificateFields(JSON.parse('{"type":"4h2EuSOrHF2B0FgURmDZ4WsaYjnoY4mtGo2Q5IDf5wM","validationKey":"HhdqKRR0YNGiI1OF6fwQZaK9hsiQcZ+/bZt+yl4aqRs=","serialNumber":"qLyxd6A+MLMfC6oOhyY5Buginn6KwLwr3+YPLM4NOQQ=","fields":{"cool":"aEpSJTI1ai1DPWj4yFawAYLFh6GpB1845toO8aygHlX5kwNJKbocV1TppJVjGtiqbmBgEA==","paymail":"sWppKUNX51PIkJ9TGcmlAbVJp2I9kNpgi6MmOaqFxTNHJXzsZwjRk73HaUBZyhPVoMF77YL5pUXRlHc5b0AsYJaJqOI1pz4kHZ+T9QmaF9UNvn9tUHxiOWb/6w=="},"certifier":"04cab461076409998157f05bb90f07886380186fd3d88b99c549f21de4d2511b8388cfd9e557bba8263a1e8b0a293d6696e2ac3e9e9343d6941b4434f7a62156e8","revocationOutpoint":"000000000000000000000000000000000000000000000000000000000000000000000000","signature":"3044022042d52629481e72e7270f398a2837c78e5a8132883d1957a8d3decad6de097eef02203e43af1d146aeebd1660b39442ec3d146cb3953b9bb086ca980a38ceea2185b5"}'), { cool: 'k5RCerdsQ4mTb+ZiyxvIpaE34+CSOlQPO34zR9n5zZ4Gh9GoHHQkapXYOg8bzwhNo9EEPxqMRvm8khiXa/fUqLfVQd134Uy6OtkCasWZlTs=' }, '048d4af3922796e50f8c6ecd4722116c5476a9b51e213a64e3be147ec6c9f69db363cf69e532c048b0bbf037579629d24b6c81c5a9b920f5bd00a40c7bb973b397', 'dc38f15198fc8cd92a920fd07fc715d223dbca120e523e636a7b835aa932ce36')
-  console.log(decryptedFields)
-}
-test()

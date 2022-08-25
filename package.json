@@ -4,12 +4,15 @@
   "description": "Tools for working with Authrite.",
   "main": "./src/index.js",
   "scripts": {
-    "doc": "documentation readme src/index.js -f md -s API"
+    "doc": "documentation readme src/index.js -f md -s API",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "author": "Peer-to-peer Privacy Systems Research, LLC",
   "license": "Open BSV License",
   "devDependencies": {
     "documentation": "^14.0.0",
+    "jest": "^28.1.3",
     "standard": "^17.0.0"
   },
   "dependencies": {
