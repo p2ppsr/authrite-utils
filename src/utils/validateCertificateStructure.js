@@ -34,7 +34,7 @@ module.exports = (certificate) => {
   else if (certificate.certifier == null) {
     errorMessage = 'Certifier is required!'
   }
-  // Certifier must be a valid public key // TODO: Create helper function
+  // Certifier must be a valid public key
   else if (!isValidPublicKey(certificate.certifier)) {
     errorMessage = 'Certifier must be a valid public key'
   }
