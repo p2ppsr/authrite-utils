@@ -1,5 +1,5 @@
 const { getPaymentAddress, getPaymentPrivateKey } = require('sendover')
-const { decrypt } = require('@cwi/crypto')
+const { decrypt } = require('cwi-crypto')
 const { Crypto } = require('@peculiar/webcrypto')
 global.crypto = new Crypto()
 const BabbageSDK = require('@babbage/sdk')
