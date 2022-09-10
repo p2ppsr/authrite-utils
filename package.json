@@ -19,7 +19,7 @@
     "@babbage/sdk": "^0.3.0",
     "cwi-crypto": "^0.1.1",
     "@peculiar/webcrypto": "^1.4.0",
-    "bsv": "^1.5.6",
-    "sendover": "^1.1.4"
+    "babbage-bsv": "^0.1.0",
+    "sendover": "^1.1.5"
   }
 }

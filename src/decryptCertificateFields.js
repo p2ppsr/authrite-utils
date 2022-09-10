@@ -29,14 +29,14 @@ const decryptCertificateFields = async (certificate, keyring, verifierPrivateKey
         senderPublicKey: certificate.subject,
         recipientPrivateKey: verifierPrivateKey,
         invoiceNumber: `2-authrite certificate field encryption-${certificate.serialNumber} ${fieldName}`,
-        returnType: 'bsv'
+        returnType: 'babbage-bsv'
       })
       // 2. Derive the sender’s public key:
       const derivedPublicKeyringKey = getPaymentAddress({
         senderPrivateKey: verifierPrivateKey,
         recipientPublicKey: certificate.subject,
         invoiceNumber: `2-authrite certificate field encryption-${certificate.serialNumber} ${fieldName}`,
-        returnType: 'bsv'
+        returnType: 'babbage-bsv'
       })
       // 3. Use the shared secret between the keys from step 1 and step 2 for decryption.
       const sharedSecret = (derivedPublicKeyringKey.point.mul(derivedPrivateKeyringKey).toBuffer().slice(1)).toString('hex')

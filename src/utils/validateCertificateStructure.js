@@ -1,4 +1,4 @@
-const bsv = require('bsv')
+const bsv = require('babbage-bsv')
 const isValidPublicKey = (key) => {
   try {
     bsv.PublicKey.fromString(key)

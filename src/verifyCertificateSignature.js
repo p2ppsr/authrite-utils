@@ -1,5 +1,5 @@
 const { getPaymentAddress } = require('sendover')
-const bsv = require('bsv')
+const bsv = require('babbage-bsv')
 const validateCertificateStructure = require('./utils/validateCertificateStructure')
 
 /**
