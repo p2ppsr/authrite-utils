@@ -16,7 +16,9 @@ const verifyCertificateSignature = (certificate) => {
   validateCertificateStructure(certificate)
   // Remove Signature
   const signature = certificate.signature
+  let keyring = certificate.keyring
   delete certificate.signature
+  delete certificate.keyring
 
   // Derive Certificate Public Key
   const signingPublicKey = getPaymentAddress({
@@ -33,6 +35,7 @@ const verifyCertificateSignature = (certificate) => {
     bsv.PublicKey.fromString(signingPublicKey)
   )
   certificate.signature = signature
+  certificate.keyring = keyring
   if (hasValidSignature === true) {
     return true
   } else {
