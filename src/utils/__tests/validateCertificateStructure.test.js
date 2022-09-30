@@ -13,31 +13,31 @@ describe('validateCertificateStructure', () => {
   it('Throws an error if subject is missing', () => {
     delete cert.subject
     expect(() => validateCertificateStructure(cert)).toThrow(new Error(
-      'Subject is required!'
+      'A certificate subject is required'
     ))
   })
   it('Throws an error if validationKey is a fucking function', () => { // I hate validation so much.
     cert.validationKey = () => { }
     expect(() => validateCertificateStructure(cert)).toThrow(new Error(
-      'Validation key is required!'
+      'A certificate validation key is required'
     ))
   })
   it('Throws an error if signature is not DER', () => {
     cert.signature = 'deadbeef'
     expect(() => validateCertificateStructure(cert)).toThrow(new Error(
-      'Invalid signature format, it must be DER!'
+      'The certificate signature is in an invalid format, it must be DER'
     ))
   })
   it('Throws an error if subject is not a public key', () => {
     cert.subject = 'deadbeef'
     expect(() => validateCertificateStructure(cert)).toThrow(new Error(
-      'Subject must be a valid public key!'
+      'The certificate subject must be a valid public key'
     ))
   })
   it('Throws an error if certifier is not a public key', () => {
     cert.certifier = 'deadbeef'
     expect(() => validateCertificateStructure(cert)).toThrow(new Error(
-      'Certifier must be a valid public key!'
+      'The certificate certifier must be a valid public key'
     ))
   })
 })

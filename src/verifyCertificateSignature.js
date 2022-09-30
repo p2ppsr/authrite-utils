@@ -4,9 +4,12 @@ const validateCertificateStructure = require('./utils/validateCertificateStructu
 const stringify = require('json-stable-stringify')
 
 /**
- * Verifies that the provided certificate has a valid signature. Also checks the structure of the certificate.
+ * Verifies that the provided certificate has a valid signature. Also checks 
+ * the structure of the certificate. Throws errors if the certificate is 
+ * invalid.
+ *
  * @param {Object} certificate The certificate to verify.
- * @returns {Boolean} the result of the verification.
+ * @returns {Boolean} true if the certificate is valid
  */
 const verifyCertificateSignature = (certificate) => {
   // Validate Certificate Structure
@@ -30,6 +33,13 @@ const verifyCertificateSignature = (certificate) => {
     bsv.PublicKey.fromString(signingPublicKey)
   )
   certificate.signature = signature
-  return hasValidSignature
+  if (hasValidSignature === true) {
+    return true
+  } else {
+    const e = new Error(`The signature for the Authrite certificate with serial number "${certificate.serialNumber}" is invalid`)
+    e.code = 'ERR_AUTHRITE_CERT_SIG_INVALID'
+    e.certificateSerialNumber = certificate.serialNumber
+    throw e
+  }
 }
 module.exports = verifyCertificateSignature
