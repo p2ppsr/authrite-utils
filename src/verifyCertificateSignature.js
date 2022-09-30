@@ -1,6 +1,7 @@
 const { getPaymentAddress } = require('sendover')
 const bsv = require('babbage-bsv')
 const validateCertificateStructure = require('./utils/validateCertificateStructure')
+const stringify = require('json-stable-stringify')
 
 /**
  * Verifies that the provided certificate has a valid signature. Also checks the structure of the certificate.
@@ -24,7 +25,7 @@ const verifyCertificateSignature = (certificate) => {
 
   // Verify Signature
   const hasValidSignature = bsv.crypto.ECDSA.verify(
-    bsv.crypto.Hash.sha256(Buffer.from(JSON.stringify(certificate))),
+    bsv.crypto.Hash.sha256(Buffer.from(stringify(certificate))),
     bsv.crypto.Signature.fromString(signature),
     bsv.PublicKey.fromString(signingPublicKey)
   )
