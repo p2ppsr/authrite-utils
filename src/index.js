@@ -1,4 +1,4 @@
 module.exports = {
-    verifyCertificateSignature: require('./verifyCertificateSignature'),
-    decryptCertificateFields: require('./decryptCertificateFields')
+  verifyCertificateSignature: require('./verifyCertificateSignature'),
+  decryptCertificateFields: require('./decryptCertificateFields')
 }
