@@ -1,4 +1,4 @@
-import { decrypt } from '@babbage/sdk'
+const { decrypt } = require('@babbage/sdk')
 
 const decryptOwnedCertificateField = async ({
     certificate,
@@ -21,7 +21,7 @@ const decryptOwnedCertificateFields = async (certificate) => {
     return decryptedFields
 }
 
-export {
+module.exports = {
     decryptOwnedCertificateField,
     decryptOwnedCertificateFields
 }

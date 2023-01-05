@@ -1,4 +1,4 @@
-import { Authrite } from 'authrite-js'
+const { Authrite } = require('authrite-js')
 
 // Helper class for making signed authrite requests to a specific server.
 // Shares a common Authrite instance to allow caching for certificates.
@@ -37,6 +37,6 @@ class AuthriteClient {
     }
 }
 
-export {
+module.exports = {
     AuthriteClient
 }
