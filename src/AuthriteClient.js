@@ -1,3 +1,4 @@
+const sdk = require('@babbage/sdk')
 const { Authrite } = require('authrite-js')
 
 // Helper class for making signed authrite requests to a specific server.
@@ -34,6 +35,22 @@ class AuthriteClient {
             throw e
         }
         return result
+    }
+
+    async createCertificate({
+        certificateType,
+        fieldObject,
+        certifierUrl,
+        certifierPublicKey
+    }) {
+        const certificate = await sdk.createCertificate({
+            certificateType,
+            fieldObject,
+            certifierUrl,
+            certifierPublicKey
+        })
+        AuthriteClient.Authrite.addCertificate(certificate)
+        return certificate
     }
 }
 

@@ -1,4 +1,4 @@
-const { decrypt } = require('@babbage/sdk')
+const { decrypt, getCertificates } = require('@babbage/sdk')
 
 const decryptOwnedCertificateField = async ({
     certificate,
@@ -21,7 +21,15 @@ const decryptOwnedCertificateFields = async (certificate) => {
     return decryptedFields
 }
 
+const getDecryptedCertificates = async ({ certifiers, types }) => {
+    let certificates = await getCertificates({ certifiers, types })
+    for (let cert of certificates) {
+        cert.fields = await decryptOwnedCertificateFields(cert)
+    }
+    return certificates
+}
 module.exports = {
     decryptOwnedCertificateField,
-    decryptOwnedCertificateFields
+    decryptOwnedCertificateFields,
+    getDecryptedCertificates
 }
