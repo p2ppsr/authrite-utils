@@ -1,8 +1,11 @@
 const sdk = require('@babbage/sdk')
 const { Authrite } = require('authrite-js')
 
-// Helper class for making signed authrite requests to a specific server.
-// Shares a common Authrite instance to allow caching for certificates.
+/**
+ * Helper class for making signed authrite requests to a specific server.
+ * 
+ * Shares a common Authrite instance to allow caching for certificates.
+ */
 class AuthriteClient {
     constructor(serverURL) {
         // Authrite caches certificates for multiple clients.

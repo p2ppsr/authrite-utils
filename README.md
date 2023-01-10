@@ -12,16 +12,32 @@ Tools for working with Authrite
     *   [Parameters](#parameters)
 *   [decryptCertificateFields](#decryptcertificatefields)
     *   [Parameters](#parameters-1)
+*   [certifierInitialResponse](#certifierinitialresponse)
+    *   [Parameters](#parameters-2)
+*   [certifierSignCheckArgs](#certifiersigncheckargs)
+    *   [Parameters](#parameters-3)
+*   [certifierCreateSignedCertificate](#certifiercreatesignedcertificate)
+    *   [Parameters](#parameters-4)
+*   [decryptOwnedCertificateField](#decryptownedcertificatefield)
+    *   [Parameters](#parameters-5)
+*   [decryptOwnedCertificateFields](#decryptownedcertificatefields)
+    *   [Parameters](#parameters-6)
+*   [decryptOwnedCertificates](#decryptownedcertificates)
+    *   [Parameters](#parameters-7)
+*   [AuthriteClient](#authriteclient)
+    *   [Parameters](#parameters-8)
 
 ### verifyCertificateSignature
 
-Verifies that the provided certificate has a valid signature. Also checks the structure of the certificate.
+Verifies that the provided certificate has a valid signature. Also checks
+the structure of the certificate. Throws errors if the certificate is
+invalid.
 
 #### Parameters
 
 *   `certificate` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The certificate to verify.
 
-Returns **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** the result of the verification.
+Returns **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if the certificate is valid
 
 ### decryptCertificateFields
 
@@ -34,6 +50,113 @@ Verifies that the provided certificate has a valid signature
 *   `verifierPrivateKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** A private key as a base64 string belonging to the certificate verifier. If not provided, the BabbageSDK decrypt function will be used instead.
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** An object containing the decrypted fields.
+
+### certifierInitialResponse
+
+Authrite Certifier Helper Function
+Creates a response object in the standard format for initialRequest.
+
+#### Parameters
+
+*   `obj` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** All parameters for this function are provided in an object
+
+    *   `obj.clientNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** random data selected by client. Typically 32 bytes in base64 encoding.
+    *   `obj.certifierPrivateKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Certifier's private key. 32 random bytes in hex encoding.
+    *   `obj.certificateType` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Certificate type identifier. 32 bytes in base64 encoding.
+
+### certifierSignCheckArgs
+
+Authrite Certifier Helper Function
+Checks the standard inputs to signCertificate for common errors.
+Returns null on success (no errors).
+Returns an object like { code: 'ERR\_INVALID\_REQUEST', description: '...' } on failure.
+
+#### Parameters
+
+*   `obj` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** All parameters for this function are provided in an object
+
+    *   `obj.clientNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** random data selected by client. Typically 32 bytes in base64 encoding.
+    *   `obj.certifierPrivateKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Certifier's private key. 32 random bytes in hex encoding.
+    *   `obj.certificateType` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Certificate type identifier. 32 bytes in base64 encoding.
+    *   `obj.messageType` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Must be the string 'certificateSigningRequest'.
+    *   `obj.type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The requested certificate type. Must equal certificateType.
+    *   `obj.serverSerialNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The serialNonce value returned by prior initialRequest.
+    *   `obj.serverValidationNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The validationNonce value returned by prior initialRequest.
+    *   `obj.serialNumber` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The serialNumber value returned by prior initialRequest.
+    *   `obj.validationKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The validationKey value returned by prior initialRequest.
+
+### certifierCreateSignedCertificate
+
+Authrite Certifier Helper Function
+Checks the standard inputs to signCertificate for common errors.
+Returns null on success (no errors).
+Returns an object like { code: 'ERR\_INVALID\_REQUEST', description: '...' } on failure.
+
+#### Parameters
+
+*   `obj` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** All parameters for this function are provided in an object
+
+    *   `obj.validationKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The validationKey value returned by prior initialRequest.
+    *   `obj.certifierPrivateKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Certifier's private key. 32 random bytes in hex encoding.
+    *   `obj.certificateType` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Certificate type identifier. 32 bytes in base64 encoding.
+    *   `obj.serialNumber` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The serialNumber value returned by prior initialRequest.
+    *   `obj.clientNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** random data selected by client. Typically 32 bytes in base64 encoding.
+    *   `obj.messageType` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Must be the string 'certificateSigningRequest'.
+    *   `obj.type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The requested certificate type. Must equal certificateType.
+    *   `obj.serverSerialNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The serialNonce value returned by prior initialRequest.
+    *   `obj.serverValidationNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** The validationNonce value returned by prior initialRequest.
+    *   `obj.subject` &#x20;
+    *   `obj.fields` &#x20;
+    *   `obj.revocationOutpoint` &#x20;
+
+### decryptOwnedCertificateField
+
+Decrypts a single certificate field for client-only use.
+
+#### Parameters
+
+*   `obj` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** All parameters are provided in an object
+
+    *   `obj.certificate` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The certificate with a field to decrypt
+    *   `obj.fieldName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the field to decrypt
+    *   `obj.callerAgreesToKeepDataClientSide` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Whether the caller of this function agrees to keep the data client-side (optional, default `false`)
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** The decrypted field value for client-side-only use
+
+### decryptOwnedCertificateFields
+
+Decrypts all fields in a certificate for client-only use.
+
+#### Parameters
+
+*   `certificate` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The certificate containing fields to decrypt
+*   `callerAgreesToKeepDataClientSide` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Whether the caller of this function agrees to keep the data client-side (optional, default `false`)
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** Decrypted fields object for client-side-only use
+
+### decryptOwnedCertificates
+
+Searches for user certificates, returning decrypted certificate fields for client-side-only use
+
+#### Parameters
+
+*   `$0` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
+
+    *   `$0.certifiers` &#x20;
+    *   `$0.types` &#x20;
+    *   `$0.callerAgreesToKeepDataClientSide`   (optional, default `false`)
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>>** The set of decrypted certificates for client-only use
+
+### AuthriteClient
+
+Helper class for making signed authrite requests to a specific server.
+
+Shares a common Authrite instance to allow caching for certificates.
+
+#### Parameters
+
+*   `serverURL` &#x20;
 
 ## License
 
