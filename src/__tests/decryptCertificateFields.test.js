@@ -1,12 +1,39 @@
 const decryptCertificateFields = require('../decryptCertificateFields')
+const stringify = require('json-stable-stringify')
 
-// TODO get vectors and properly test
 
-const VALID = {"type":"4h2EuSOrHF2B0FgURmDZ4WsaYjnoY4mtGo2Q5IDf5wM","subject":"048d4af3922796e50f8c6ecd4722116c5476a9b51e213a64e3be147ec6c9f69db363cf69e532c048b0bbf037579629d24b6c81c5a9b920f5bd00a40c7bb973b397","validationKey":"GMescrTfSmpVf314Ay6IbIMQe2eGnFEhDn+a0+tA/ZA=","serialNumber":"OEE5H1HlBUph7M9PKMTvpf/PqRmBFilKvkgphIHGp/Q=","fields":{"cool":"B7esmhOkTStK6C/RBMyCk5f4TQqhvmSu5/i+UQHC9Cp4z8omX53lS1l/DRdXYpaQKySjBw==","paymail":"W7mpFCivMYiuv0wTra04jWLJTs7y4ZZMigXY+TBKhGojEHIwEsMVC6+fGzOWeNC5msFRtSaNqu2I3nyyfQzZcvxngevnx16mgtibb3lSgNH4OlP+s6XJqu1f5Q=="},"certifier":"04cab461076409998157f05bb90f07886380186fd3d88b99c549f21de4d2511b8388cfd9e557bba8263a1e8b0a293d6696e2ac3e9e9343d6941b4434f7a62156e8","revocationOutpoint":"000000000000000000000000000000000000000000000000000000000000000000000000","signature":"304402200942504fcd7aba6cb355cdf3bf5ff81a1c8f7f35e4871a0e5f6dccc8e3ed51f00220759fabf50f80f47e7fd037b1292b07cbdf748566e2a389160d7cc0c769bf1a55"}
+  const VALID_CERT = {
+      //certifier: '025384871bedffb233fdb0b4899285d73d0f0a2b9ad18062a062c01c8bdb2f720a',
+      fields: {
+        domain: '4Rp/1H7RKPE5zxhzIM5C098sRpvxRlfugVKum6spOGMQ15JBaAh+wntQuxa656JPh3iQ88nDQhqdjzE=',
+        identity: 'LZzi8GCRF4SjU63lTorT9ej/Nb8MhW1hASeiJSYT7VOO+pMXJXVingKc+3+ZSW82oIl6BA==',
+        stake: '1Y4Z1a216atKFQOrUeU+xz8j4PdbD9bIZblHeKMjJNcI1MZYVP0KO6D0LCN0w7A66Pwx2g==',
+        when: 'flSOcvWx+MSunYkGeBRkTlj9aDlHxYADecf3Lr13gh/ndrJtouvB+3/75o3C4jpwG2550nxWAHBgR6s5oW+K5PDzKj9G1nPN'
+      },
+      //keyring: {
+      //  domain: 'Ccj/ALyluOam0ikjmw6RKHMIvXCBUEMk8EhGcGiYhQBr+tIcHd4BlNMqtDs43YNSKstuevLG6bYRE3NunWioZpRssyRPphZt96pd22IofPY=',
+      //  identity:'2MREiStrbQrGiNes07dPdHZrNG/PsaWH2OGcoKPOB4IRTiBQ+Jwn05VTHI5hKg6wdl4oBYT6NZtdNXg58PevOeYDHEwrynEkYl0Ox7Xq8Xc=',
+      //  stake:'dUOMJybp8WhhUTFeu5IbyGidinlLRvlzjFXxx5f/rXLLOqfWcVhaqZ+KrXDDilsyikAtJI2iIrD2gyLP8lYR9/DTEFeB0ghNMxtOjYe6jSs=',
+      //  when:'oxAAHLRBD6hxF0nTo63IajDQlypxBgSXas8uaNqpQ1fcFWwBEt5c/oZQZBY1MATrsl2BZ8wOHcnTRKjGMnkX1514bqBAMwtKmvhSXss8eTo='
+      //},
+      //revocationOutpoint: '000000000000000000000000000000000000000000000000000000000000000000000000',
+      serialNumber: 'zFpvOxvuewvvUnmE4DncNHELvlTUVs0bVOK/Z9KR3tc=',
+      //signature: '3044022074333e79941faa3608aae2322e1eedbdef9a473d252f43434b357f55e76ed8050220749baff081ff52472342fe21212e2f069a052d9904f4e92c0cee8203a82af21c',
+      subject: '02a1c81d78f5c404fd34c418525ba4a3b52be35328c30e67234bfcf30eb8a064d8',
+      type: 'jVNgF8+rifnz00856b4TkThCAvfiUE4p+t/aHYl1u0c=',
+      //validationKey: 'i0P2MiTG/gt1Q0aUjAfmUp0i9vIq8YEzC5FAYPzE1PU='
+    }
+const keyring = {
+        domain: 'Ccj/ALyluOam0ikjmw6RKHMIvXCBUEMk8EhGcGiYhQBr+tIcHd4BlNMqtDs43YNSKstuevLG6bYRE3NunWioZpRssyRPphZt96pd22IofPY=',
+        identity:'2MREiStrbQrGiNes07dPdHZrNG/PsaWH2OGcoKPOB4IRTiBQ+Jwn05VTHI5hKg6wdl4oBYT6NZtdNXg58PevOeYDHEwrynEkYl0Ox7Xq8Xc=',
+        stake:'dUOMJybp8WhhUTFeu5IbyGidinlLRvlzjFXxx5f/rXLLOqfWcVhaqZ+KrXDDilsyikAtJI2iIrD2gyLP8lYR9/DTEFeB0ghNMxtOjYe6jSs=',
+        when:'oxAAHLRBD6hxF0nTo63IajDQlypxBgSXas8uaNqpQ1fcFWwBEt5c/oZQZBY1MATrsl2BZ8wOHcnTRKjGMnkX1514bqBAMwtKmvhSXss8eTo='
+      }
+const verifierPrivateKey = '45f4c64e021024c5300c69113881e57acaaeda60c3281b2a229386d8f83c4c6f'
 
 describe('decryptCertificateFields', () => {
   it('Decrypts some fields',async  () => {
-    const decryptedFields = await decryptCertificateFields({"type":"4h2EuSOrHF2B0FgURmDZ4WsaYjnoY4mtGo2Q5IDf5wM","validationKey":"HhdqKRR0YNGiI1OF6fwQZaK9hsiQcZ+/bZt+yl4aqRs=","serialNumber":"qLyxd6A+MLMfC6oOhyY5Buginn6KwLwr3+YPLM4NOQQ=","fields":{"cool":"aEpSJTI1ai1DPWj4yFawAYLFh6GpB1845toO8aygHlX5kwNJKbocV1TppJVjGtiqbmBgEA==","paymail":"sWppKUNX51PIkJ9TGcmlAbVJp2I9kNpgi6MmOaqFxTNHJXzsZwjRk73HaUBZyhPVoMF77YL5pUXRlHc5b0AsYJaJqOI1pz4kHZ+T9QmaF9UNvn9tUHxiOWb/6w=="},"certifier":"04cab461076409998157f05bb90f07886380186fd3d88b99c549f21de4d2511b8388cfd9e557bba8263a1e8b0a293d6696e2ac3e9e9343d6941b4434f7a62156e8","revocationOutpoint":"000000000000000000000000000000000000000000000000000000000000000000000000","signature":"3044022042d52629481e72e7270f398a2837c78e5a8132883d1957a8d3decad6de097eef02203e43af1d146aeebd1660b39442ec3d146cb3953b9bb086ca980a38ceea2185b5"}, { cool: 'k5RCerdsQ4mTb+ZiyxvIpaE34+CSOlQPO34zR9n5zZ4Gh9GoHHQkapXYOg8bzwhNo9EEPxqMRvm8khiXa/fUqLfVQd134Uy6OtkCasWZlTs=' }, '048d4af3922796e50f8c6ecd4722116c5476a9b51e213a64e3be147ec6c9f69db363cf69e532c048b0bbf037579629d24b6c81c5a9b920f5bd00a40c7bb973b397', 'dc38f15198fc8cd92a920fd07fc715d223dbca120e523e636a7b835aa932ce36')
-    expect(decryptedFields).toEqual({ cool: 'true' })
+    const decryptedFields = await decryptCertificateFields(VALID_CERT, keyring, verifierPrivateKey)
+    expect(decryptedFields).toEqual({domain: 'twitter.com', identity: '@bob', stake: '$100', when: '2023-01-07T03:28:35.888Z'})
   })
 })
