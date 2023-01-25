@@ -2,6 +2,5 @@ module.exports = {
     verifyCertificateSignature: require('./verifyCertificateSignature'),
     decryptCertificateFields: require('./decryptCertificateFields'),
     ...require('./certifierServerHelpers'),
-    ...require('./certifierClientHelpers'),
-    ...require('./AuthriteClient')
+    ...require('./certifierClientHelpers')
 }
