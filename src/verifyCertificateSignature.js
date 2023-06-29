@@ -22,7 +22,7 @@ const verifyCertificateSignature = (certificate) => {
 
   // Derive Certificate Public Key
   const signingPublicKey = getPaymentAddress({
-    senderPrivateKey: bsv.PrivateKey.fromHex(Buffer.from(certificate.validationKey, 'base64').toString('hex')),
+    senderPrivateKey: Buffer.from(certificate.validationKey, 'base64').toString('hex'),
     recipientPublicKey: certificate.certifier,
     invoiceNumber: `2-authrite certificate signature ${certificate.type}-${certificate.serialNumber}`,
     returnType: 'publicKey'
