@@ -9,7 +9,10 @@ const verifyCertificate = async (certificate, chain) => {
   await verifyCertificateSignature(certificate)
 
   // Check the spent status of the revocation outpoint
-  const results = await getSpentStatusForOutpoint(certificate.revocationOutpoint, chain)
-  return results.spent
+  const spent = await getSpentStatusForOutpoint(certificate.revocationOutpoint, chain)
+  if (spent) {
+    return false
+  }
+  return true
 }
 module.exports = verifyCertificate
