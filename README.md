@@ -8,24 +8,33 @@ Tools for working with Authrite
 
 #### Table of Contents
 
-*   [verifyCertificateSignature](#verifycertificatesignature)
+*   [verifyCertificate](#verifycertificate)
     *   [Parameters](#parameters)
-*   [decryptCertificateFields](#decryptcertificatefields)
+*   [verifyCertificateSignature](#verifycertificatesignature)
     *   [Parameters](#parameters-1)
-*   [certifierInitialResponse](#certifierinitialresponse)
+*   [decryptCertificateFields](#decryptcertificatefields)
     *   [Parameters](#parameters-2)
-*   [certifierSignCheckArgs](#certifiersigncheckargs)
+*   [certifierInitialResponse](#certifierinitialresponse)
     *   [Parameters](#parameters-3)
-*   [certifierCreateSignedCertificate](#certifiercreatesignedcertificate)
+*   [certifierSignCheckArgs](#certifiersigncheckargs)
     *   [Parameters](#parameters-4)
-*   [decryptOwnedCertificateField](#decryptownedcertificatefield)
+*   [certifierCreateSignedCertificate](#certifiercreatesignedcertificate)
     *   [Parameters](#parameters-5)
-*   [decryptOwnedCertificateFields](#decryptownedcertificatefields)
+*   [decryptOwnedCertificateField](#decryptownedcertificatefield)
     *   [Parameters](#parameters-6)
-*   [decryptOwnedCertificates](#decryptownedcertificates)
+*   [decryptOwnedCertificateFields](#decryptownedcertificatefields)
     *   [Parameters](#parameters-7)
-*   [AuthriteClient](#authriteclient)
+*   [decryptOwnedCertificates](#decryptownedcertificates)
     *   [Parameters](#parameters-8)
+
+### verifyCertificate
+
+Verifies a certificate signature, structure, and revocation status
+
+#### Parameters
+
+*   `certificate` &#x20;
+*   `chain` &#x20;
 
 ### verifyCertificateSignature
 
@@ -147,16 +156,6 @@ Searches for user certificates, returning decrypted certificate fields for clien
     *   `$0.callerAgreesToKeepDataClientSide`   (optional, default `false`)
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>>** The set of decrypted certificates for client-only use
-
-### AuthriteClient
-
-Helper class for making signed authrite requests to a specific server.
-
-Shares a common Authrite instance to allow caching for certificates.
-
-#### Parameters
-
-*   `serverURL` &#x20;
 
 ## License
 
