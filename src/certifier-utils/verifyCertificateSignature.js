@@ -1,11 +1,11 @@
 const { getPaymentAddress } = require('sendover')
 const bsv = require('babbage-bsv')
-const validateCertificateStructure = require('./utils/validateCertificateStructure')
+const validateCertificateStructure = require('./validateCertificateStructure')
 const stringify = require('json-stable-stringify')
 
 /**
- * Verifies that the provided certificate has a valid signature. Also checks 
- * the structure of the certificate. Throws errors if the certificate is 
+ * Verifies that the provided certificate has a valid signature. Also checks
+ * the structure of the certificate. Throws errors if the certificate is
  * invalid.
  *
  * @param {Object} certificate The certificate to verify.
@@ -16,7 +16,7 @@ const verifyCertificateSignature = (certificate) => {
   validateCertificateStructure(certificate)
   // Remove Signature
   const signature = certificate.signature
-  let keyring = certificate.keyring
+  const keyring = certificate.keyring
   delete certificate.signature
   delete certificate.keyring
 

@@ -1,11 +1,12 @@
-const verifyCertificateSignature = require('../verifyCertificateSignature')
+/* eslint-env jest */
+const verifyCertificateSignature = require('../../src/certifier-utils/verifyCertificateSignature')
 const stringify = require('json-stable-stringify')
 
 // TODO get correct vectors and properly test
 
 describe('verifyCertificateSignature', () => {
   it('Verifies a signature', () => {
-    var signedCert = {
+    const signedCert = {
       certifier: '025384871bedffb233fdb0b4899285d73d0f0a2b9ad18062a062c01c8bdb2f720a',
       fields: {
         domain: '4Rp/1H7RKPE5zxhzIM5C098sRpvxRlfugVKum6spOGMQ15JBaAh+wntQuxa656JPh3iQ88nDQhqdjzE=',
@@ -15,9 +16,9 @@ describe('verifyCertificateSignature', () => {
       },
       keyring: {
         domain: 'Ccj/ALyluOam0ikjmw6RKHMIvXCBUEMk8EhGcGiYhQBr+tIcHd4BlNMqtDs43YNSKstuevLG6bYRE3NunWioZpRssyRPphZt96pd22IofPY=',
-        identity:'2MREiStrbQrGiNes07dPdHZrNG/PsaWH2OGcoKPOB4IRTiBQ+Jwn05VTHI5hKg6wdl4oBYT6NZtdNXg58PevOeYDHEwrynEkYl0Ox7Xq8Xc=',
-        stake:'dUOMJybp8WhhUTFeu5IbyGidinlLRvlzjFXxx5f/rXLLOqfWcVhaqZ+KrXDDilsyikAtJI2iIrD2gyLP8lYR9/DTEFeB0ghNMxtOjYe6jSs=',
-        when:'oxAAHLRBD6hxF0nTo63IajDQlypxBgSXas8uaNqpQ1fcFWwBEt5c/oZQZBY1MATrsl2BZ8wOHcnTRKjGMnkX1514bqBAMwtKmvhSXss8eTo='
+        identity: '2MREiStrbQrGiNes07dPdHZrNG/PsaWH2OGcoKPOB4IRTiBQ+Jwn05VTHI5hKg6wdl4oBYT6NZtdNXg58PevOeYDHEwrynEkYl0Ox7Xq8Xc=',
+        stake: 'dUOMJybp8WhhUTFeu5IbyGidinlLRvlzjFXxx5f/rXLLOqfWcVhaqZ+KrXDDilsyikAtJI2iIrD2gyLP8lYR9/DTEFeB0ghNMxtOjYe6jSs=',
+        when: 'oxAAHLRBD6hxF0nTo63IajDQlypxBgSXas8uaNqpQ1fcFWwBEt5c/oZQZBY1MATrsl2BZ8wOHcnTRKjGMnkX1514bqBAMwtKmvhSXss8eTo='
       },
       revocationOutpoint: '000000000000000000000000000000000000000000000000000000000000000000000000',
       serialNumber: 'zFpvOxvuewvvUnmE4DncNHELvlTUVs0bVOK/Z9KR3tc=',
