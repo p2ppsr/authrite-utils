@@ -1,6 +1,6 @@
 # authrite-utils
 
-This package offers essential utility functions used by [authrite-js](https://github.com/p2ppsr/authrite-js) for tasks like mutual authentication. Additionally, it provides a valuable resource for those looking to implement the Authrite specification on a communication channel not yet supported.
+This package offers essential utility functions used by [authrite-js](https://github.com/p2ppsr/authrite-js) and [authrite-express](https://github.com/p2ppsr/authrite-express) for tasks like mutual authentication. Additionally, it provides a valuable resource for those looking to implement the Authrite specification on a communication channel not yet supported.
 
 ## API
 
