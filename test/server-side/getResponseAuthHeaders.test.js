@@ -2,6 +2,7 @@
 const bsv = require('babbage-bsv')
 const getResponseAuthHeaders = require('../../src/server-side/getResponseAuthHeaders')
 
+// Mock Test Data
 const AUTHRITE_VERSION = '0.2'
 const TEST_CLIENT_PRIVATE_KEY = '0d7889a0e56684ba795e9b1e28eb906df43454f8172ff3f6807b8cf9464994df'
 const TEST_SERVER_PRIVATE_KEY = '6dcc124be5f382be631d49ba12f61adbce33a5ac14f6ddee12de25272f943f8b'

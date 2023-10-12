@@ -18,7 +18,7 @@ const getRequestAuthHeaders = async ({
   clientInitialNonce,
   serverInitialNonce,
   requestSignature,
-  certificatesToInclude
+  certificatesToInclude = '[]'
 }) => {
   return {
     'x-authrite': authriteVersion,
