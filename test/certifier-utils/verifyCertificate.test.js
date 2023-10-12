@@ -1,4 +1,5 @@
-const verifyCertificate = require('../verifyCertificate')
+/* eslint-env jest */
+const verifyCertificate = require('../../src/certifier-utils/verifyCertificate')
 // const stringify = require('json-stable-stringify')
 
 const REVOKED_CERT = {

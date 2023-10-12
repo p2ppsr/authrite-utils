@@ -1,5 +1,6 @@
-const decryptCertificateFields = require('../decryptCertificateFields')
-const stringify = require('json-stable-stringify')
+/* eslint-env jest */
+const decryptCertificateFields = require('../../src/certifier-utils/decryptCertificateFields')
+// const stringify = require('json-stable-stringify')
 
 const VALID_CERT = {
   // certifier: '025384871bedffb233fdb0b4899285d73d0f0a2b9ad18062a062c01c8bdb2f720a',

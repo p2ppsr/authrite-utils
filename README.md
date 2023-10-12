@@ -1,6 +1,6 @@
 # authrite-utils
 
-Tools for working with Authrite
+This package offers essential utility functions used by [authrite-js](https://github.com/p2ppsr/authrite-js) and [authrite-express](https://github.com/p2ppsr/authrite-express) for tasks like mutual authentication. Additionally, it provides a valuable resource for those looking to implement the Authrite specification on a communication channel not yet supported.
 
 ## API
 
@@ -8,24 +8,169 @@ Tools for working with Authrite
 
 #### Table of Contents
 
-*   [verifyCertificate](#verifycertificate)
+*   [createRequestSignature](#createrequestsignature)
     *   [Parameters](#parameters)
-*   [verifyCertificateSignature](#verifycertificatesignature)
+*   [getCertificatesToInclude](#getcertificatestoinclude)
     *   [Parameters](#parameters-1)
-*   [decryptCertificateFields](#decryptcertificatefields)
+*   [getRequestAuthHeaders](#getrequestauthheaders)
     *   [Parameters](#parameters-2)
-*   [certifierInitialResponse](#certifierinitialresponse)
+*   [verifyServerInitialResponse](#verifyserverinitialresponse)
     *   [Parameters](#parameters-3)
-*   [certifierSignCheckArgs](#certifiersigncheckargs)
+*   [verifyServerResponse](#verifyserverresponse)
     *   [Parameters](#parameters-4)
-*   [certifierCreateSignedCertificate](#certifiercreatesignedcertificate)
+*   [getResponseAuthHeaders](#getresponseauthheaders)
     *   [Parameters](#parameters-5)
-*   [decryptOwnedCertificateField](#decryptownedcertificatefield)
+*   [validateAuthHeaders](#validateauthheaders)
     *   [Parameters](#parameters-6)
-*   [decryptOwnedCertificateFields](#decryptownedcertificatefields)
+*   [validateCertificates](#validatecertificates)
     *   [Parameters](#parameters-7)
-*   [decryptOwnedCertificates](#decryptownedcertificates)
+*   [verifyCertificate](#verifycertificate)
     *   [Parameters](#parameters-8)
+*   [verifyCertificateSignature](#verifycertificatesignature)
+    *   [Parameters](#parameters-9)
+*   [decryptCertificateFields](#decryptcertificatefields)
+    *   [Parameters](#parameters-10)
+*   [certifierInitialResponse](#certifierinitialresponse)
+    *   [Parameters](#parameters-11)
+*   [certifierSignCheckArgs](#certifiersigncheckargs)
+    *   [Parameters](#parameters-12)
+*   [certifierCreateSignedCertificate](#certifiercreatesignedcertificate)
+    *   [Parameters](#parameters-13)
+*   [decryptOwnedCertificateField](#decryptownedcertificatefield)
+    *   [Parameters](#parameters-14)
+*   [decryptOwnedCertificateFields](#decryptownedcertificatefields)
+    *   [Parameters](#parameters-15)
+*   [decryptOwnedCertificates](#decryptownedcertificates)
+    *   [Parameters](#parameters-16)
+
+### createRequestSignature
+
+Creates a valid ECDSA message signature to include in an Authrite request
+
+#### Parameters
+
+*   `obj` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all params given in an object
+
+    *   `obj.dataToSign` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [buffer](https://nodejs.org/api/buffer.html))** the data that should be signed with the derived private key
+    *   `obj.requestNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** random data provided by the client
+    *   `obj.serverInitialNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** random session data provided by the server
+    *   `obj.clientPrivateKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** optional private key to use as the signing strategy
+    *   `obj.serverPublicKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the identity key of the server the request should be sent to
+
+### getCertificatesToInclude
+
+Provide a list of certificates with acceptable type and certifier values for the request, based on what the server requested
+
+#### Parameters
+
+*   `obj` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all params provided in an object
+
+    *   `obj.signingStrategy` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** specifies which signing strategy should be used
+    *   `obj.servers` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the servers the current Authrite instance is interacting with
+    *   `obj.certificates` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** the current available certificates
+    *   `obj.baseUrl` &#x20;
+
+### getRequestAuthHeaders
+
+Construct BRC-31 compliant authentication headers to send to the server
+Note: Currently assumes initial param validation has been done. TODO: Add it here as well
+Note: Also doesn't currently support the initial request response here. TODO: add it here as well
+
+#### Parameters
+
+*   `obj` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all params given in an object
+
+    *   `obj.authriteVersion` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the current version of Authrite being used
+    *   `obj.clientPublicKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** of the current client making the request
+    *   `obj.requestNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** random nonce provided by the client
+    *   `obj.serverInitialNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** initial session nonce provided by the server
+    *   `obj.requestSignature` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** message signature provided as a hex string
+    *   `obj.certificatesToInclude` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** authrite certificates provided to the server upon request
+    *   `obj.clientInitialNonce` &#x20;
+
+Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** valid auth headers
+
+### verifyServerInitialResponse
+
+Verifies a server's initial response as part of the initial handshake
+
+#### Parameters
+
+*   `obj` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all params given in an object
+
+    *   `obj.authriteVersion` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the current version of Authrite being used by the server
+    *   `obj.baseUrl` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the baseUrl of the server
+    *   `obj.signingStrategy` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** specifies which signing strategy should be used
+    *   `obj.clientPrivateKey` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [buffer](https://nodejs.org/api/buffer.html) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))?** clientPrivateKey to use for key derivation
+    *   `obj.clients` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** object whose keys are base URLs and whose values are instances of the Client class
+    *   `obj.servers` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** object whose keys are base URLs and whose values are instances of the Server class
+    *   `obj.serverResponse` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** contains the server's response including the required authentication data
+    *   `obj.certificates` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** the current available certificates
+
+### verifyServerResponse
+
+Verifies a server's response after the initial handshake has happened
+
+#### Parameters
+
+*   `obj` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all params given in an object
+
+    *   `obj.messageToVerify` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the message signed to verify
+    *   `obj.headers` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the authentication headers provided by the server
+    *   `obj.baseUrl` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the baseUrl of the server
+    *   `obj.signingStrategy` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** specifies which signing strategy should be used
+    *   `obj.clients` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the clients the current Authrite instance is interacting with
+    *   `obj.servers` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the servers the current Authrite instance is interacting with
+    *   `obj.clientPrivateKey` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [buffer](https://nodejs.org/api/buffer.html) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))?** clientPrivateKey to use for key derivation
+
+### getResponseAuthHeaders
+
+Constructs the required server response headers for a given client
+Supports initial request, and subsequent requests
+
+#### Parameters
+
+*   `obj` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all params given in an object
+
+    *   `obj.authrite` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the version of authrite being used
+    *   `obj.messageType` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of message to respond to
+    *   `obj.serverPrivateKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** server private key to use to derive the signing private key
+    *   `obj.clientPublicKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** public key of the sender
+    *   `obj.clientNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** random data provided by the client
+    *   `obj.serverNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** random data provided by the server
+    *   `obj.messageToSign` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** expected message to be signed (optional, default `'test'`)
+    *   `obj.certificates` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** provided certificates as requested by the client (optional, default `[]`)
+    *   `obj.requestedCertificates` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** a structure indicating which certificates the client should provide
+
+Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the required response headers for authentication
+
+### validateAuthHeaders
+
+Used to validate client auth headers provided in a request
+
+#### Parameters
+
+*   `obj` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all params given in an object
+
+    *   `obj.messageToSign` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the message signed when the signature was created
+    *   `obj.authHeaders` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** provided by the client for authentication
+    *   `obj.serverPrivateKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** server private key to use to derive the signingPublicKey
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** the validation result
+
+### validateCertificates
+
+Validates an array of certificates provided in a request
+
+#### Parameters
+
+*   `obj` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all params given in an object
+
+    *   `obj.serverPrivateKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the server's private key to use in the field decryption process
+    *   `obj.identityKey` **identityKey** of the client initiating the request
+    *   `obj.certificates` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** provided to the server by the client
+
+Returns **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array) | [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))** array of the validated certificates, or an Error object to return to the client
 
 ### verifyCertificate
 
