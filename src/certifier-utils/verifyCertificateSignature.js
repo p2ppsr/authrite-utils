@@ -17,8 +17,12 @@ const verifyCertificateSignature = (certificate) => {
   // Remove Signature
   const signature = certificate.signature
   const keyring = certificate.keyring
+  const masterKeyring = certificate.masterKeyring
+
   delete certificate.signature
   delete certificate.keyring
+  delete certificate.masterKeyring
+  delete certificate.userId // Make sure a userId is not present!
 
   // Derive Certificate Public Key
   const signingPublicKey = getPaymentAddress({
@@ -36,6 +40,10 @@ const verifyCertificateSignature = (certificate) => {
   )
   certificate.signature = signature
   certificate.keyring = keyring
+
+  // Add back the required props
+  if (masterKeyring) certificate.masterKeyring = masterKeyring
+
   if (hasValidSignature === true) {
     return true
   } else {
