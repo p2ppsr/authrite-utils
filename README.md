@@ -85,7 +85,7 @@ Note: Also doesn't currently support the initial request response here. TODO: ad
     *   `obj.requestNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** random nonce provided by the client
     *   `obj.serverInitialNonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** initial session nonce provided by the server
     *   `obj.requestSignature` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** message signature provided as a hex string
-    *   `obj.certificatesToInclude` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** authrite certificates provided to the server upon request
+    *   `obj.certificatesToInclude` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** authrite certificates provided to the server upon request (optional, default `'[]'`)
     *   `obj.clientInitialNonce` &#x20;
 
 Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** valid auth headers
@@ -186,6 +186,8 @@ Verifies a certificate signature, structure, and revocation status
 Verifies that the provided certificate has a valid signature. Also checks
 the structure of the certificate. Throws errors if the certificate is
 invalid.
+
+Note: Does not guarantee that additional fields are not provided in this certificate structure!
 
 #### Parameters
 
