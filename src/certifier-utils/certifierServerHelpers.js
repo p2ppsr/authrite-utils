@@ -149,7 +149,7 @@ const certifierCreateSignedCertificate = ({
   const derivedPrivateKey = getPaymentPrivateKey({
     senderPublicKey: validationPublicKey,
     recipientPrivateKey: certifierPrivateKey,
-    invoiceNumber: `2-authrite certificate signature ${certificateType}-${serialNumber}`,
+    invoiceNumber: `2-authrite certificate signature ${Buffer.from(certificateType, 'base64').toString('hex')}-${serialNumber}`,
     returnType: 'wif'
   })
 

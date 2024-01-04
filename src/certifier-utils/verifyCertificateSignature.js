@@ -32,7 +32,7 @@ const verifyCertificateSignature = (certificate) => {
   const signingPublicKey = getPaymentAddress({
     senderPrivateKey: Buffer.from(certificateToVerify.validationKey, 'base64').toString('hex'),
     recipientPublicKey: certificateToVerify.certifier,
-    invoiceNumber: `2-authrite certificate signature ${certificateToVerify.type}-${certificateToVerify.serialNumber}`,
+    invoiceNumber: `2-authrite certificate signature ${Buffer.from(certificateToVerify.type, 'base64').toString('hex')}-${certificateToVerify.serialNumber}`,
     returnType: 'publicKey'
   })
 
