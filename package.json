@@ -19,7 +19,6 @@
     "babbage-bsv": "^0.2.4",
     "cryptononce": "^0.1.4",
     "cwi-crypto": "^0.1.8",
-    "cwi-external-services": "^0.3.87",
     "json-stable-stringify": "^1.0.2",
     "sendover": "^1.2.5"
   },
