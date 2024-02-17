@@ -20,7 +20,7 @@
     "cryptononce": "^0.1.4",
     "cwi-crypto": "^0.1.8",
     "json-stable-stringify": "^1.0.2",
-    "sendover": "^1.2.15"
+    "sendover": "^1.2.16"
   },
   "devDependencies": {
     "documentation": "^14.0.1",
