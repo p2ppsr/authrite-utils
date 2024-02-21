@@ -1,6 +1,6 @@
 {
   "name": "authrite-utils",
-  "version": "0.2.30",
+  "version": "0.2.31",
   "description": "Tools for working with Authrite.",
   "main": "src/index.js",
   "scripts": {
