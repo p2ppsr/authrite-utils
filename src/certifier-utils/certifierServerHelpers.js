@@ -1,7 +1,5 @@
 const { createNonce, verifyNonce } = require('cryptononce')
 const crypto = require('crypto')
-const { Crypto } = require('@peculiar/webcrypto')
-global.crypto = new Crypto()
 const bsv = require('babbage-bsv')
 const stringify = require('json-stable-stringify')
 const { getPaymentPrivateKey } = require('sendover')
