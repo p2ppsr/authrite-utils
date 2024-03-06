@@ -5,7 +5,7 @@ if (typeof global.crypto !== 'object') {
   const { Crypto } = require('@peculiar/webcrypto')
   global.crypto = new Crypto()
 }
-const BabbageSDK = require('@babbage/sdk')
+const BabbageSDK = require('@babbage/sdk-ts')
 
 /**
  * Verifies that the provided certificate has a valid signature

@@ -1,4 +1,4 @@
-const BabbageSDK = require('@babbage/sdk')
+const BabbageSDK = require('@babbage/sdk-ts')
 
 /**
  * Provide a list of certificates with acceptable type and certifier values for the request, based on what the server requested

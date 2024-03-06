@@ -1,4 +1,4 @@
-const { decrypt, getCertificates } = require('@babbage/sdk')
+const { decrypt, getCertificates } = require('@babbage/sdk-ts')
 
 const CLIENT_ERROR_MESSAGE = 'This is user-owned data. To use this function, you must agree to keep it client-side, and it must never leave their device. If you are sharing this data with a third party, you MUST use the Babbage SDK\'s proveCertificate function instead, and specify the verifier\'s identity so the user can review and approve the request. If you agree to keep this data from leaving the user device within your application, you can pass the callerAgreesToKeepDataClientSide parameter to this function to proceed. Note that there will be an immutable record of your application\'s use of this function on the BSV blockchain.'
 

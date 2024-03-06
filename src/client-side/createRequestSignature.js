@@ -1,6 +1,6 @@
 const { getPaymentPrivateKey } = require('sendover')
 const bsv = require('babbage-bsv')
-const BabbageSDK = require('@babbage/sdk')
+const BabbageSDK = require('@babbage/sdk-ts')
 
 /**
  * Creates a valid ECDSA message signature to include in an Authrite request

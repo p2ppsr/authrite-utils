@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const sdk = require('@babbage/sdk')
+const sdk = require('@babbage/sdk-ts')
 sdk.decrypt = jest.fn()
 sdk.getCertificates = jest.fn()
 

@@ -1,4 +1,4 @@
-const BabbageSDK = require('@babbage/sdk')
+const BabbageSDK = require('@babbage/sdk-ts')
 const { getPaymentAddress } = require('sendover')
 const bsv = require('babbage-bsv')
 
