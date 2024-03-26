@@ -36,7 +36,7 @@ describe('getResponseAuthHeaders', () => {
       nonce: 'Ea2SOkMQiMbdCv4uinGmVIqAT+mRkq9VSIX+LG6cKso=',
       certificates: [],
       requestedCertificates: [],
-      signature: '3044022048363a298900d30ec4a9e22f14da682d36c010d491c1487612f1d62824eddecb02205e0b1bfd904a106a5853fbc9cd3df82f7bee2f200af11cc5661f439b66ffe25a'
+      signature: '3044022069db36033d2c0b3e61a7070fdd408d261bdd291488384185a127a916790a492002206da7627711f0e67855a3470a0e95e8d89893e559db900154e451c9f6ea635bb2'
     })
   })
   it('get headers necessary for authenticating a standard response', async () => {
@@ -57,7 +57,7 @@ describe('getResponseAuthHeaders', () => {
       'x-authrite-nonce': 'Ea2SOkMQiMbdCv4uinGmVIqAT+mRkq9VSIX+LG6cKso=',
       'x-authrite-yournonce': 'HtoBsUgDzj5orHDv1N2zdtiQpDM+aKwGY4VthxDYRHg=',
       'x-authrite-certificates': '[]',
-      'x-authrite-signature': '3044022048363a298900d30ec4a9e22f14da682d36c010d491c1487612f1d62824eddecb02205e0b1bfd904a106a5853fbc9cd3df82f7bee2f200af11cc5661f439b66ffe25a'
+      'x-authrite-signature': '3044022069db36033d2c0b3e61a7070fdd408d261bdd291488384185a127a916790a492002206da7627711f0e67855a3470a0e95e8d89893e559db900154e451c9f6ea635bb2'
     })
   })
 })

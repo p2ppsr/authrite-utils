@@ -1,7 +1,7 @@
 /* eslint-env jest */
 const sdk = require('@babbage/sdk-ts')
-sdk.decrypt = jest.fn()
-sdk.getCertificates = jest.fn()
+
+jest.mock('@babbage/sdk-ts')
 
 const { decryptOwnedCertificateField, decryptOwnedCertificateFields, decryptOwnedCertificates } = require('../../src/index')
 

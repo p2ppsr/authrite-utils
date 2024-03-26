@@ -88,7 +88,7 @@ describe('certifierServerHelpers', () => {
       subject: validInput.subject,
       validationKey: validInput.validationKey,
       certifier: '025384871bedffb233fdb0b4899285d73d0f0a2b9ad18062a062c01c8bdb2f720a',
-      signature: '3045022100f5c0b003ff7fafdf49b6f167b99260c8fcb6517be7a2338f90dc05dba830699d02202603ad3bcfae96d36ed9749eee96841bfa063881d9ea56a63755e4355efe0d9f'
+      signature: '304502210098be7a070657e01075fa0bbd60fec56842d790354e2ba1bd705a0f29934c76d6022034e658ac9d5ad813f477c484759c6900a7445f95acd9dd12819a87ecee34b380'
     }
     expect(certifierCreateSignedCertificate(validInput)).toEqual(certificate)
   })

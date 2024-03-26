@@ -9,6 +9,9 @@ const isValidPublicKey = (key) => {
 }
 const isValidSignature = sig => {
   try {
+    if (!sig.startsWith('30')) {
+      throw new Error('Invalid sig')
+    }
     bsv.crypto.Signature.fromString(sig)
     return true
   } catch (e) {
