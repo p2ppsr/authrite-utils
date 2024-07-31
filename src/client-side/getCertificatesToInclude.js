@@ -18,7 +18,7 @@ const getCertificatesToInclude = async ({
   const requestedCerts = servers[baseUrl].requestedCertificates
   const certificatesToInclude = certificates.filter(cert =>
     requestedCerts.certifiers.includes(cert.certifier) &&
-      Object.keys(requestedCerts.types).includes(cert.type)
+    Object.keys(requestedCerts.types).includes(cert.type)
   )
 
   await Promise.all(certificatesToInclude.map(async cert => {
@@ -30,8 +30,8 @@ const getCertificatesToInclude = async ({
     // TODO: Consider refactoring array comparison.
     if (
       !verifierKeyring ||
-        JSON.stringify(Object.keys(verifierKeyring)) !==
-        JSON.stringify(requestedFields)
+      JSON.stringify(Object.keys(verifierKeyring)) !==
+      JSON.stringify(requestedFields)
     ) {
       // If there are differences, or no keyring, SDK proveCertificate function generates a new keyring for this verifier containing only the verifier’s requested fields.
       // Ensure Babbage signing strategy is used
@@ -49,7 +49,8 @@ const getCertificatesToInclude = async ({
           subject: cert.subject,
           type: cert.type,
           revocationOutpoint: cert.revocationOutpoint,
-          signature: cert.signature
+          signature: cert.signature,
+          masterKeyring: cert.masterKeyring
         },
         fieldsToReveal: requestedFields,
         verifierPublicIdentityKey: servers[baseUrl].identityPublicKey
