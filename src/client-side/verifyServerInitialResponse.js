@@ -97,7 +97,7 @@ const verifyServerInitialResponse = async ({
   servers[baseUrl].nonce = serverResponse.nonce
 
   // Check certificates were requested, and that the client is using Babbage as the signing strategy
-  if (serverResponse.requestedCertificates && serverResponse.requestedCertificates.certifiers && serverResponse.requestedCertificates.certifiers.length !== 0 && this.signingStrategy === 'Babbage') {
+  if (serverResponse.requestedCertificates && serverResponse.requestedCertificates.certifiers && serverResponse.requestedCertificates.certifiers.length !== 0 && signingStrategy === 'Babbage') {
     // Find matching certificates
     let matchingCertificates = await BabbageSDK.getCertificates({
       certifiers: serverResponse.requestedCertificates.certifiers,
@@ -105,7 +105,7 @@ const verifyServerInitialResponse = async ({
     })
 
     // IF the getCertificates function returns any certificates
-    // THEN they are added to the this.certificates within the Authrite client.
+    // THEN they are added to the certificates within the Authrite client.
     if (matchingCertificates.length !== 0) {
       // Update certs to contain a keyring property
       matchingCertificates = matchingCertificates.map(cert => {
@@ -113,7 +113,7 @@ const verifyServerInitialResponse = async ({
         return cert
       })
 
-      // Check if cert is already added to this.certificates to prevent duplicates
+      // Check if cert is already added to certificates to prevent duplicates
       // Note: Valid certificates with identical signatures are always identical
       matchingCertificates.forEach(cert => {
         let duplicate = false
